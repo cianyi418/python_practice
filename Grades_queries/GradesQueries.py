@@ -41,6 +41,11 @@ def export_to_csv(file_name):
 def import_from_csv(file_name):
     global students_grades
     file_path = os.path.join(os.path.dirname(__file__), file_name)
+
+    if not os.path.exists(file_path):
+        print("File not found")
+        return
+    
     with open(file_path, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file)
         next(reader)  # skip the header row
