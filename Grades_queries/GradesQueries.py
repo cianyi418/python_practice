@@ -67,6 +67,8 @@ def show_students():
 
 # Calculate the total and average grades
 def calculate_grades():
+    if not students_grades:
+        return 0, 0.0
     total = sum(students_grades.values())
     average = total / len(students_grades)
     return total, average
