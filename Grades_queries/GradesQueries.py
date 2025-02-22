@@ -31,11 +31,24 @@ def show_students():
     if not students_grades:
         print("No students found")
         return
+    
+    name_width = max(len(name) for name in students_grades) + 2
     print("\n Students Grades:")
+    print("Name".ljust(name_width), "| Grade")
     print("=" * 20)
-    for name, grade in students_grades.items():
-        print(f"{name:<10} | {grade}")
+    for name, grade in sorted(students_grades.items(), key=lambda item: item[1
+    ]):
+        print(f"{name.ljust(name_width)} | {grade}")
     print("=" * 20)
+    total, average = calculate_grades()
+    print(f"Total grades: {total}")
+    print(f"Average grade: {average:.1f}")
+
+# Calculate the total and average grades
+def calculate_grades():
+    total = sum(students_grades.values())
+    average = total / len(students_grades)
+    return total, average
         
 
 while True:
