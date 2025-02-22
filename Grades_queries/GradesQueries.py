@@ -26,6 +26,18 @@ def save_students_grades():
         json.dump(students_grades, file, indent=4, ensure_ascii=False)
     print("Students' grades saved to", json_file_path)
 
+# The showing all students display frame
+def show_students():
+    if not students_grades:
+        print("No students found")
+        return
+    print("\n Students Grades:")
+    print("=" * 20)
+    for name, grade in students_grades.items():
+        print(f"{name:<10} | {grade}")
+    print("=" * 20)
+        
+
 while True:
     print("\nChoose an option:")
     print("1. Add a student")
@@ -68,8 +80,7 @@ while True:
             print(f"{name} not found in students")
 
     elif choice == '3':
-        for name, grade in students_grades.items():
-            print(f"{name}: {grade}")
+        show_students()
 
     elif choice == '4':
         name = input("Enter the name of the student you want to delete: ").strip()
