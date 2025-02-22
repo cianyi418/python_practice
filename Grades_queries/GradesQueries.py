@@ -2,9 +2,10 @@
 
 import json
 import os
+import csv
 
 # Path to the JSON file
-json_file_path = "students.json"
+json_file_path = os.path.join(os.path.dirname(__file__), "students.json")
 
 # Load the students grades from a JSON file
 if os.path.exists(json_file_path):
@@ -25,6 +26,26 @@ def save_students_grades():
     with open(json_file_path, "w", encoding='utf-8') as file:
         json.dump(students_grades, file, indent=4, ensure_ascii=False)
     print("Students' grades saved to", json_file_path)
+
+# Export the students grades to a CSV file
+def export_to_csv(file_name):
+    file_path = os.path.join(os.path.dirname(__file__), file_name)
+    with open(file_path, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Name", "Grade"])
+        for name, grade in students_grades.items():
+            writer.writerow([name, grade])
+    print(f"Students' grades exported to {file_path}")
+
+# Import the students grades from a CSV file
+def import_from_csv(file_name):
+    global students_grades
+    file_path = os.path.join(os.path.dirname(__file__), file_name)
+    with open(file_path, mode='r', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        next(reader)  # skip the header row
+        students_grades = {rows[0]: int(rows[1]) for rows in reader}
+    print(f"Students' grades imported from {file_path}")
 
 # The showing all students display frame
 def show_students():
