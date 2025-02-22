@@ -78,7 +78,9 @@ while True:
     print("2. Search for a student's grade")
     print("3. Show all students")
     print("4. Delete a student")
-    print("5. Exit")
+    print("5. Export students' grades to a CSV file")
+    print("6. Import students' grades from a CSV file")
+    print("7. Exit")
 
     choice = input("Enter your choice: ").strip()
 
@@ -129,6 +131,14 @@ while True:
             print(f"{name} not found in students")
 
     elif choice == '5':
+        file_name = input("Enter the csv file path to export the students' grades: ").strip()
+        export_to_csv(file_name)
+
+    elif choice == '6':
+        file_name = input("Enter the csv file path to import the students' grades: ").strip()
+        import_from_csv(file_name)
+
+    elif choice == '7':
         print("Exiting...")
         break
 
